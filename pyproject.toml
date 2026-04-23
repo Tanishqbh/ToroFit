@@ -5,12 +5,12 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "torofit"
 version = "0.1.0"
-description = "A basic fitness tracking Python package."
+description = "A Python package for Topological Data Analysis (TDA)."
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
 authors = [{ name = "ToroFit Contributors" }]
-keywords = ["fitness", "health", "tracking"]
+keywords = ["topology", "tda", "topological data analysis", "persistent homology"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: End Users/Desktop",

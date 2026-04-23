@@ -1,6 +1,6 @@
 # ToroFit
 
-A basic fitness tracking Python package.
+A Python package for Topological Data Analysis (TDA).
 
 ## Installation
 
@@ -21,8 +21,9 @@ pip install -e .
 ```python
 import torofit
 
-print(torofit.greet("Athlete"))
-# Hello, Athlete! Welcome to ToroFit.
+info = torofit.version_info()
+print(info)
+# {'name': 'torofit', 'version': '0.1.0'}
 ```
 
 ## Documentation

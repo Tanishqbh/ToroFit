@@ -1,23 +1,21 @@
 """Core utilities for the ToroFit package."""
 
 
-def greet(name: str = "World") -> str:
-    """Return a greeting message.
-
-    Parameters
-    ----------
-    name : str, optional
-        The name to greet. Defaults to ``"World"``.
+def version_info() -> dict:
+    """Return version and package metadata.
 
     Returns
     -------
-    str
-        A greeting string.
+    dict
+        A dictionary containing ``name`` and ``version`` keys.
 
     Examples
     --------
-    >>> from torofit import greet
-    >>> greet("Athlete")
-    'Hello, Athlete! Welcome to ToroFit.'
+    >>> from torofit.core import version_info
+    >>> info = version_info()
+    >>> info["name"]
+    'torofit'
     """
-    return f"Hello, {name}! Welcome to ToroFit."
+    from torofit import __version__
+
+    return {"name": "torofit", "version": __version__}

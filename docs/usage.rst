@@ -4,20 +4,12 @@ Usage
 Basic usage
 -----------
 
-Import the package and call :func:`torofit.greet`:
+Import the package and call :func:`torofit.version_info`:
 
 .. code-block:: python
 
    import torofit
 
-   print(torofit.greet("Athlete"))
-   # Hello, Athlete! Welcome to ToroFit.
-
-You can also call it without arguments:
-
-.. code-block:: python
-
-   from torofit import greet
-
-   print(greet())
-   # Hello, World! Welcome to ToroFit.
+   info = torofit.version_info()
+   print(info)
+   # {'name': 'torofit', 'version': '0.1.0'}
