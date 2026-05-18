@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use ToroFit in your research, please cite this software."
+title: "ToroFit: Fourier series on toroidal manifolds via persistent-cohomology circular coordinates"
+type: software
+version: "0.1.0a0"
+date-released: "2026-05-18"
+license: MIT
+repository-code: "https://github.com/Tanishqbh/ToroFit"
+url: "https://github.com/Tanishqbh/ToroFit"
+keywords:
+  - topological data analysis
+  - persistent cohomology
+  - circular coordinates
+  - fourier series
+  - manifold learning
+authors:
+  - family-names: Bhatia
+    given-names: Tanishq
+    email: bhatia.ta@northeastern.edu
+    affiliation: Northeastern University
+    # orcid: "https://orcid.org/0000-0000-0000-0000"  # TODO: add ORCID before JOSS
+  - family-names: Perea
+    given-names: Jose
+    email: j.pereabenitez@northeastern.edu
+    affiliation: Northeastern University
+    # orcid: "https://orcid.org/0000-0000-0000-0000"  # TODO: add ORCID before JOSS
