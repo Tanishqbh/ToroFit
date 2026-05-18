@@ -16,7 +16,7 @@ ToroFit Documentation
    notebooks/01_clover_leaf
    notebooks/03_torus
    notebooks/04_torus_wedge_circle
-   notebooks/05_mickey_mouse
+   notebooks/05_bunny
    notebooks/06_trefoil_knot
 
 Indices and tables
