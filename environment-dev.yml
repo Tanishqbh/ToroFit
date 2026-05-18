@@ -1,0 +1,22 @@
+name: torofit-dev
+channels:
+  - conda-forge
+dependencies:
+  # Runtime (mirrors environment.yml)
+  - python>=3.9,<3.12
+  - numpy
+  - scipy
+  - matplotlib
+  - gudhi
+  # Development tooling
+  - pytest
+  - sphinx
+  - nbsphinx
+  - ipykernel
+  - plotly
+  - pre-commit
+  - nbstripout
+  - pip
+  - pip:
+      - git+https://github.com/Tanishqbh/DREiMac@partition
+      - -e .

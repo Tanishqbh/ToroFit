@@ -21,10 +21,17 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.viewcode",
     "sphinx.ext.napoleon",
+    "nbsphinx",
 ]
 
 templates_path = ["_templates"]
-exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "**.ipynb_checkpoints"]
+
+# Re-execute a notebook at build time only if it ships with no outputs.
+# Notebooks that can't be reproduced in CI should be committed with their
+# outputs preserved (see CONTRIBUTING / installation docs for the
+# `keep_output` metadata workflow with nbstripout).
+nbsphinx_execute = "auto"
 
 # -- Options for HTML output -------------------------------------------------
 

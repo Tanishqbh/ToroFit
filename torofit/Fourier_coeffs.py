@@ -31,11 +31,17 @@ def Energy_weights(K, d):
 
 
 def fit(X, Y, K, lam, weights=None):
-    """Fit a T^d Fourier series to data X using toroidal coordinates Y.
+    r"""Fit a :math:`\mathbb{T}^d` Fourier series to data ``X`` using toroidal coordinates ``Y``.
 
     Solves the weighted ridge problem
-        argmin_Ω  ||W^{1/2}(Θ_K Ω - X)||_F^2 + λ ||Ω||_Q^2,
-    where W = diag(weights). When weights is None, all samples get weight 1.
+
+    .. math::
+
+        \arg\min_{\Omega}\; \|W^{1/2}(\Theta_K \Omega - X)\|_F^2
+        + \lambda \|\Omega\|_Q^2,
+
+    where :math:`W = \mathrm{diag}(\text{weights})`. When ``weights`` is
+    ``None``, all samples get weight 1.
     """
     if not np.iscomplexobj(X):
         X = X.astype(complex)
