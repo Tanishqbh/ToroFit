@@ -1,0 +1,13 @@
+name: torofit
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.9,<3.12
+  - numpy
+  - scipy
+  - matplotlib
+  - gudhi
+  - pip
+  - pip:
+      - git+https://github.com/Tanishqbh/DREiMac@partition
+      - -e .
