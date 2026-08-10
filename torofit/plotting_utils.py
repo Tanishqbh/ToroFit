@@ -1,6 +1,12 @@
 import numpy as np
 from itertools import product
 from .Fourier_coeffs import *
+import colorsys
+import cmasher as cmr
+import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
+from matplotlib.transforms import Bbox
+
 def plot_fitted_torus_via_coeff_matrix(V, K, samples=100):
     '''
     Parameters
@@ -64,3 +70,91 @@ def plot_fitted_circle_via_coeff_matrix(V, K, samples=100):
     image = Toroidal_Evaluate(V,theta,K).real
 
     return image
+
+def brighten_colormap(cmap_name, lightness_boost=0.25):
+    """
+    Extracts colors from a colormap and scales up the Lightness channel.
+    lightness_boost: 0.0 (no change) to 1.0 (pure white).
+    """
+    # 1. Extract raw RGBA array from CMasher
+    cmap = plt.colormaps[cmap_name]
+    rgba_colors = cmap(np.linspace(0, 1, 256))
+    
+    bright_colors = []
+    for r, g, b, a in rgba_colors:
+        # 2. Convert RGB to Hue, Lightness, Saturation
+        h, l, s = colorsys.rgb_to_hls(r, g, b)
+        
+        # 3. Boost lightness linearly (capping at 1.0)
+        l_new = min(1.0, l + (1.0 - l) * lightness_boost)
+        
+        # 4. Convert back to RGB and save
+        r_new, g_new, b_new = colorsys.hls_to_rgb(h, l_new, s)
+        bright_colors.append((r_new, g_new, b_new, a))
+        
+    # 5. Output a brand new brightened ListedColormap
+    return mcolors.ListedColormap(bright_colors)
+
+
+def plot_cup_product_table(cocycle_nonzero_cup_products, harmonic_class_idx, cell_size=0.75):
+    # --- NEW: Calculate dimensions upfront ---
+    num_cells = len(harmonic_class_idx) + 1  # data + 1 for headers
+    
+    # Dynamically scale figsize to keep cells perfectly square and readable
+    fig_width = num_cells * cell_size
+    fig_height = num_cells * cell_size
+    fig, ax_table = plt.subplots(figsize=(fig_width, fig_height)) 
+    ax_table.axis('off')
+    
+    # 1. Build the unified matrix
+    labels = [rf'$\eta_{i+1}$' for i in harmonic_class_idx]
+    
+    full_cell_text = []
+    # Leave the top-left string empty
+    full_cell_text.append([''] + labels)
+    
+    for i in harmonic_class_idx:
+        row_data = [rf'$\eta_{i+1}$']
+        for j in harmonic_class_idx:
+            if (i, j) not in cocycle_nonzero_cup_products and (j, i) not in cocycle_nonzero_cup_products:
+                row_data.append('$= 0$')
+            else:
+                row_data.append('$\\neq 0$')
+        full_cell_text.append(row_data)
+    
+    table = ax_table.table(
+        cellText=full_cell_text,
+        loc='center',
+        cellLoc='center',
+        bbox=Bbox.from_bounds(0, 0, 1, 1)
+    )
+    
+    table.auto_set_font_size(False)
+    table.set_fontsize(14)
+    
+    header_color  = '#AEC6E8'  
+    diagonal_color = '#D3D3D3' 
+    zero_color     = '#FFCCCC' 
+    nonzero_color  = '#CCFFCC' 
+
+    for (row, col), cell in table.get_celld().items():
+        cell.PAD = 0.02  
+        
+        # Because the matrix is square, width and height are identical
+        cell.set_width(1.0 / num_cells)
+        cell.set_height(1.0 / num_cells)
+        
+        if row == 0 and col == 0:
+            cell.set_visible(False)
+        elif row == 0 or col == 0:
+            cell.set_facecolor(header_color)
+        elif row == col:  
+            cell.set_facecolor(diagonal_color)
+        elif '\\neq' in cell.get_text().get_text():
+            cell.set_facecolor(nonzero_color)
+        else:
+            cell.set_facecolor(zero_color)
+
+    plt.tight_layout(pad=0)
+    
+    return fig, ax_table

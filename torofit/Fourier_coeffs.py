@@ -46,6 +46,8 @@ def fit(X, Y, K, lam, weights=None):
     if not np.iscomplexobj(X):
         X = X.astype(complex)
 
+    if type(Y) is list and len(Y) == 1:
+        Y = Y[0]
     Y = np.asarray(Y)
     if Y.ndim < 2:
         Y = Y.reshape(-1, 1)
