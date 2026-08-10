@@ -4,10 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "torofit"
-version = "0.1.0a0"
+version = "0.1.0"
 description = "Fit smooth Fourier series on toroidal manifolds T^d to point-cloud data via persistent-cohomology circular coordinates."
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = "<3.12, >=3.9"
 license = { text = "MIT" }
 authors = [
     { name = "Tanishq Bhatia", email = "bhatia.ta@northeastern.edu" },
