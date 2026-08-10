@@ -65,6 +65,41 @@ def get_cup_prod_2_dim(theta1, theta2, points, radius):
         edge1, edge2 = boundary[0][0], boundary[2][0]
         cupvec[i] = theta1[*edge1] * theta2[*edge2]
     return cupvec
+
+def get_nonzero_cup_products_dim_1(tc, harmonic_class_idx, verbose=False):
+    '''
+    Args:
+        tc: ToroFit object containing the data and parameters
+        harmonic_class_idx: list of indices of harmonic classes to consider
+        points: coordinates of point cloud
+        radius: radius for rips complex
+    Returns:
+        nonzero_cup_products: list of tuples representing nonzero cup products between 1-dim cohomology classes
+    '''
+    from dreimac.utils import CohomologyUtils
+    harm_reps = tc._harm_reps
+    cocycle_mats = []
+    for cocycle_idx in harmonic_class_idx:
+        theta = CohomologyUtils.one_cocycle_to_matrix(dist_mat=tc._dist_land_land, 
+                                                    threshold=tc._rips_threshold,
+                                                    lookup_table=tc._cns_lookup_table,
+                                                    n_points = tc._n_landmarks,
+                                                    cocycle_as_vector=harm_reps[cocycle_idx])
+        cocycle_mats.append(theta)
+    from itertools import combinations
+    cocycle_nonzero_cup_products= []
+    points = tc._X[tc._idx_land]; radius= tc._rips_threshold
+
+    d1 = get_d1_for_rips(points, radius=radius)
     
+    if verbose:
+        print(f"Computing rank for coboundary matrix d1 matrix of size {d1.shape} for Rips complex...")
+    rank_d1 = np.linalg.matrix_rank(d1)
+    for a,b in combinations(range(len(cocycle_mats)), 2):
+        cupvec = get_cup_prod_2_dim(cocycle_mats[a], cocycle_mats[b], points=points, radius=radius)
+        rank_cupped = np.linalg.matrix_rank(np.hstack([d1, cupvec.reshape(-1,1)]))
+        if rank_d1 < rank_cupped:
+            cocycle_nonzero_cup_products.append((a,b))
+    return cocycle_nonzero_cup_products 
 
 

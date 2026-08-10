@@ -66,3 +66,8 @@ Sketched only — full design lives in the plan file.
 - ORCID iDs on every author
 - `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, issue/PR templates
 - Submit via JOSS editorial workflow (after ~6 months of public usage)
+
+
+## Miscellaneous
+
+- make cmasher optional dependency
