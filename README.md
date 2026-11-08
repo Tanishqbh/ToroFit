@@ -60,16 +60,6 @@ For toroidal coordinates of dimension $d > 1$, pass an `(M, d)` array of angles 
 
 End-to-end examples (point cloud → DREiMaC circular coordinates → ToroFit) live in [`docs/notebooks/`](docs/notebooks/).
 
-## What's coming
-
-Planned for the next minor release (`0.2.0`):
-
-- **AnnData / scanpy adapter** — one-call fitting on single-cell embeddings, with results written back to `adata.obsm` and `adata.uns` following scanpy conventions
-- **Cell-cycle demo notebook** — discover cell-cycle phase from raw scRNA-seq embeddings without prior marker-gene knowledge
-- **Continuous integration** — pytest matrix and lint on every PR
-
-If single-cell or other cyclic-biology applications interest you, watch / star the repo.
-
 ## Documentation
 
 Full documentation is at [torofit.readthedocs.io](https://torofit.readthedocs.io).
